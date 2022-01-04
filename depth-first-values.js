@@ -1,5 +1,9 @@
 "use strict";
 
+// Iterative solution
+// Time: O(n)
+// Space: O(n)
+
 class ListNode {
     constructor(val) {
         this.val = val;
@@ -28,5 +32,26 @@ c.right = f;
 // d   e     f
 
 function depthFirstValues(root) {
+    if (root === null) return [];
 
+    let stack = [root];
+    let resultArr = [];
+
+    while (stack.length > 0) {
+        const currentNode = stack.pop();
+        resultArr.push(currentNode.val);
+        
+        if (currentNode.right) {
+            stack.push(currentNode.right);
+        }
+
+        if (currentNode.left) {
+            stack.push(currentNode.left);
+        }
+    }
+
+    return resultArr;
 }
+
+console.log( depthFirstValues(a) ); // [ 'a', 'b', 'd', 'e', 'c', 'f' ]
+console.log( depthFirstValues(null) ); // []
