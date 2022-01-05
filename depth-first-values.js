@@ -1,9 +1,5 @@
 "use strict";
 
-// Iterative solution
-// Time: O(n)
-// Space: O(n)
-
 class ListNode {
     constructor(val) {
         this.val = val;
@@ -31,27 +27,50 @@ c.right = f;
 //  / \     \
 // d   e     f
 
+// Solution 1 -- iterative 
+// Time: O(n)
+// Space: O(n)
+// function depthFirstValues(root) {
+//     if (root === null) return [];
+
+//     let stack = [root];
+//     let resultArr = [];
+
+//     while (stack.length > 0) {
+//         const currentNode = stack.pop();
+//         resultArr.push(currentNode.val);
+        
+//         if (currentNode.right) {
+//             stack.push(currentNode.right);
+//         }
+
+//         if (currentNode.left) {
+//             stack.push(currentNode.left);
+//         }
+//     }
+
+//     return resultArr;
+// }
+
+/**
+ * Solution 2 -- recursive
+ * Time: O(n)
+ * Space: O(n)
+ * 
+ * @param {ListNode} root
+ * @returns {string[]}
+ */
 function depthFirstValues(root) {
+    // empty tree
     if (root === null) return [];
 
-    let stack = [root];
-    let resultArr = [];
+    // return arr of vals from left subtree
+    const leftValues = depthFirstValues(root.left);
+    // return arr of vals from right subtree
+    const rightValues = depthFirstValues(root.right);
 
-    while (stack.length > 0) {
-        const currentNode = stack.pop();
-        resultArr.push(currentNode.val);
-        
-        if (currentNode.right) {
-            stack.push(currentNode.right);
-        }
-
-        if (currentNode.left) {
-            stack.push(currentNode.left);
-        }
-    }
-
-    return resultArr;
+    return [root.val, ...leftValues, ...rightValues];
 }
 
 console.log( depthFirstValues(a) ); // [ 'a', 'b', 'd', 'e', 'c', 'f' ]
-console.log( depthFirstValues(null) ); // []
+// console.log( depthFirstValues(null) ); // []
