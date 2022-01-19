@@ -58,9 +58,9 @@ c.right = f;
 // }
 
 /**
- * Solution 1 -- iterative
+ * Solution 1 -- recursive (depth-first traversal)
  * Time: O(n)
- * Space: O(n)
+ * Space: O(n) -- due to call stack
  * 
  * @param {ListNode} root 
  * @returns {number}
@@ -68,23 +68,7 @@ c.right = f;
 function treeSum(root) {
     if (root === null) return 0;
     
-    let queue = [root];
-    let sum = 0;
-    
-    while (queue.length > 0) {
-        const current = queue.shift();
-        sum += current.val;
-        
-        if (current.left !== null) {
-            queue.push(current.left);
-        }
-        
-        if (current.right !== null) {
-            queue.push(current.right);
-        }
-    }
-    
-    return sum;
+    return root.val + treeSum(root.left) + treeSum(root.right);
 }
 
 console.log( treeSum(a) ); // -> 21
