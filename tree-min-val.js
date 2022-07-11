@@ -21,11 +21,11 @@ b.left = d;
 b.right = e;
 c.right = f;
 
-//      a
+//      5
 //    /   \
-//   b     c
+//   3     8
 //  / \     \
-// d   e     f
+// 9   10     4
 
 // /**
 //  * solution 1 -- iterative depth-first traversal
