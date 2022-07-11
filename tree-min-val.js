@@ -53,30 +53,48 @@ c.right = f;
 //     return minVal;
 // }
 
+// /**
+//  * solution 2 -- iterative breadth-first traversal
+//  * time: O(n^2) due to array.shift() inside of loop
+//  * space: O(n)
+//  * 
+//  * @param {ListNode} root
+//  * @returns {number}
+//  */
+// function treeMinValue(root) {
+//     let queue = [root];
+//     let minVal = Infinity;
+
+//     while (queue.length > 0) {
+//         const currNode = queue.shift();
+
+//         if (currNode.val < minVal) minVal = currNode.val;
+
+//         // traverse
+//         if (currNode.left !== null) queue.push(currNode.left);
+
+//         if (currNode.right !== null) queue.push(currNode.right);
+//     }
+
+//     return minVal;
+// }
+
 /**
- * solution 2 -- iterative breadth-first traversal
- * time: O(n^2) due to array.shift() inside of loop
+ * solution 3 -- recursive depth-first traversal
+ * time: O(n)
  * space: O(n)
  * 
  * @param {ListNode} root
  * @returns {number}
  */
 function treeMinValue(root) {
-    let queue = [root];
-    let minVal = Infinity;
+    // base case
+    if (root === null) return Infinity;
 
-    while (queue.length > 0) {
-        const currNode = queue.shift();
+    const smallestLeft = treeMinValue(root.left);
+    const smallestRight = treeMinValue(root.right);
 
-        if (currNode.val < minVal) minVal = currNode.val;
-
-        // traverse
-        if (currNode.left !== null) queue.push(currNode.left);
-
-        if (currNode.right !== null) queue.push(currNode.right);
-    }
-
-    return minVal;
+    return Math.min(smallestLeft, smallestRight, root.val);
 }
 
 console.log(treeMinValue(a)); // 3
