@@ -29,6 +29,8 @@ c.right = f;
 
 /**
  * Solution -- iterative
+ * time: O(n^2) -- due to array.shift() being O(n) op within a loop
+ * space: O(n)
  * 
  * @param {ListNode} root 
  * @returns {string[]}
